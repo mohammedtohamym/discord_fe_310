@@ -45,3 +45,8 @@ npm run build
 npx serve -s build -l 3000
 # open http://localhost:3000
 ```
+
+7. Single-page app routing (important)
+
+- This app uses client-side routing (react-router). Hosts serving static files must return `index.html` for unknown routes so paths like `/login` load the app instead of returning 404.
+- I added `public/_redirects` which instructs many static hosts (including Render) to rewrite all requests to `/index.html`. Keep it in `public/` so it lands in the `build/` output.
