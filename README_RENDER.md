@@ -33,9 +33,7 @@ Use these exact values in the Render dashboard for a Static Site deployment (rec
 
 5. Troubleshooting
 
-- If you see OpenSSL/ERR_OSSL_EVP_UNSUPPORTED during build, either:
-  - Ensure Node 18 is selected for the service, or
-  - Add environment variable: NODE_OPTIONS = --openssl-legacy-provider
+If you see OpenSSL/ERR_OSSL_EVP_UNSUPPORTED during build, ensure Node 18 is selected for the service. Node 18 is preferred over adding NODE_OPTIONS.
 
 6. Quick local test before deploy
 
