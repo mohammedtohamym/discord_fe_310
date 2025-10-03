@@ -5,7 +5,7 @@ const apiBase = process.env.REACT_APP_API_BASE_URL || "http://localhost:5002/api
 
 const apiClient = axios.create({
   baseURL: apiBase,
-  timeout: 1000,
+  timeout: 60000, // 60 seconds for deployed backend (Render can have cold starts)
 });
 
 apiClient.interceptors.request.use(
