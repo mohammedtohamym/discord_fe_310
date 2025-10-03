@@ -4,20 +4,30 @@ import Peer from "simple-peer";
 import * as socketConnection from "./socketConnection";
 
 const getConfiguration = () => {
-  const turnIceServers = null;
+  let turnIceServers = null;
 
-  if (turnIceServers) {
-    // TODO use TURN server credentials
-  } else {
-    console.warn("Using only STUN server");
-    return {
-      iceServers: [
-        {
-          urls: "stun:stun.l.google.com:19302",
-        },
-      ],
-    };
+  try {
+    const envTurn = process.env.REACT_APP_TURN_SERVERS;
+    if (envTurn) {
+      turnIceServers = JSON.parse(envTurn);
+    }
+  } catch (e) {
+    console.warn("Invalid REACT_APP_TURN_SERVERS format", e);
+    turnIceServers = null;
   }
+
+  if (turnIceServers && Array.isArray(turnIceServers) && turnIceServers.length > 0) {
+    return { iceServers: turnIceServers };
+  }
+
+  console.warn("Using only STUN server");
+  return {
+    iceServers: [
+      {
+        urls: "stun:stun.l.google.com:19302",
+      },
+    ],
+  };
 };
 
 const onlyAudioConstraints = {

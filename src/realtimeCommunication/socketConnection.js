@@ -13,8 +13,9 @@ let socket = null;
 
 export const connectWithSocketServer = (userDetails) => {
   const jwtToken = userDetails.token;
+  const socketServer = process.env.REACT_APP_SOCKET_SERVER_URL || "http://localhost:5002";
 
-  socket = io("http://localhost:5002", {
+  socket = io(socketServer, {
     auth: {
       token: jwtToken,
     },
